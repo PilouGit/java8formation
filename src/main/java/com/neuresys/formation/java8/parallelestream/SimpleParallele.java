@@ -11,11 +11,11 @@ public class SimpleParallele {
 			IntStream range = IntStream.rangeClosed(1, 10);
 	        range.parallel().forEach(System.out::println);
 
-	        /*System.out.println("Parallel...");
+	       System.out.println("Parallel...");
 
 	        IntStream range2 = IntStream.rangeClosed(1, 10);
 	        range2.parallel().forEach(System.out::println);
-*/
+
 	    }
 
 	
