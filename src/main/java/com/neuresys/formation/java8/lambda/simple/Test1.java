@@ -16,9 +16,14 @@ public class Test1 {
 			return a+b;
 		});
 		Factory factory = new Factory();
-		String res3 = parser.parse("Eric Clapton", factory::createName);
-
-		String res4 = parser.parse("Eric Clapton", Factory::createNameStatic);
+		String res3 = parser.parse("Eric Clapton",
+				factory::createName);
+		//factory::createName
+		// (String,String)->String
+		parser.parse("Eric Clapton",(a,b)->a+b);
+		
+		String res4 = parser.parse("Eric Clapton",
+				Factory::createNameStatic);
 
 	}
 }

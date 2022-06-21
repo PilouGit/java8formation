@@ -12,6 +12,12 @@ public class TestFuture {
 	Integer maValeur;
 	public  void test()
 	{
+		Thread t=new Thread(()->
+		{
+			TestFuture.this.maValeur=3;
+		});
+		
+		
 		Callable<Integer> task = () -> {
 		    try {
 		        TimeUnit.SECONDS.sleep(1);
