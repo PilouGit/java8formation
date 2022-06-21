@@ -9,7 +9,7 @@ public class SimpleParallele {
 	        System.out.println("Normal...");
 	      
 			IntStream range = IntStream.rangeClosed(1, 10);
-	        range.parallel().forEach(System.out::println);
+	        range.forEach(System.out::println);
 
 	       System.out.println("Parallel...");
 

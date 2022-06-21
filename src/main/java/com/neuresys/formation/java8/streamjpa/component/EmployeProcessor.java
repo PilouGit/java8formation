@@ -29,7 +29,7 @@ public class EmployeProcessor {
   public List<Employe> processEmploye2(String email) {
     Stream<Employe> employeStream = bookRepository.getAll();
     return employeStream.
-    filter(e->e.getEmail().equalsIgnoreCase(email))
+    filter(e->e.getEmail().contains(email))
     .collect(Collectors.toList());
     
   }
