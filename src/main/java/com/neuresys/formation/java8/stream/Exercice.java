@@ -45,7 +45,7 @@ public class Exercice {
 		        .collect(Collectors.toList());
 		System.out.println(result);
 	}
-	//Obtenir une liste des produits commandés par le client du niveau 2 entre le 1er février 2021 et le 1er avril 2021
+	//Obtenir une liste des produits commandés par les clients du niveau 2 entre le 1er février 2021 et le 1er avril 2021
 	public static void exercice4()
 	{
 		List<Product> result =Repo.findAllOrder()
@@ -56,8 +56,20 @@ public class Exercice {
 				  .flatMap(o -> o.getProducts().stream())
 				  .distinct()
 				  .collect(Collectors.toList());
+		List<Product> result2 =Repo.findAllOrder()
+				  .stream()
+				  .filter(o -> 
+				  {return o.getCustomer().getTier() == 2
+				  && o.getOrderDate().compareTo(LocalDate.of(2021, 2, 1)) >= 0
+				  && o.getOrderDate().compareTo(LocalDate.of(2021, 4, 1)) <= 0;
+				  })
+				  //.filter(o -> o.getOrderDate().compareTo(LocalDate.of(2021, 2, 1)) >= 0)
+				 // .filter(o -> o.getOrderDate().compareTo(LocalDate.of(2021, 4, 1)) <= 0)
+				  .flatMap(o -> o.getProducts().stream())
+				  .distinct()
+				  .collect(Collectors.toList());
 	}
-	// Obtenir les produits les moins chers de la catégorie « Livres »
+	// Obtenir le produit le moins cher de la catégorie « Livres »
 		public static void exercice5() {
 			Optional<Product> result =  Repo.findAllProduct()
 			        .stream()
@@ -115,6 +127,9 @@ public class Exercice {
 			    statistics.getCount(), statistics.getAverage(), statistics.getMax(), statistics.getMin(), statistics.getSum()));
 	}
 	//Obtenir une carte de données avec l'identifiant de la commande et le nombre de produits de la commande
+	// Map<Id Commande, Nombre de produit de la commande
+	// .collect(toMap(commande-> id, commande-> nombre de produit))
+	
 		public static void exercice11()
 		
 		{
@@ -142,6 +157,15 @@ public class Exercice {
 			        .collect(
 			          Collectors.toMap(
 			              Function.identity(), 
+			              order -> order.getProducts().stream()
+			                    .mapToDouble(p -> p.getPrice()).sum()
+			            ) 
+			          );
+			Map<Order, Double> result2 =Repo.findAllOrder()
+			        .stream()
+			        .collect(
+			          Collectors.toMap(
+			              order->order, 
 			              order -> order.getProducts().stream()
 			                    .mapToDouble(p -> p.getPrice()).sum()
 			            ) 
