@@ -8,4 +8,8 @@ public interface Alarm {
 	    default String turnAlarmOff() {
 	        return "Turning the alarm off.";
 	    }
+	    default String giveBrand()
+	    {
+	    	return "defaultBrand";
+	    }
 }
